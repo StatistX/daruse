@@ -61,32 +61,82 @@ const timeOfDay = name => {
   }
 };
 console.log(timeOfDay('vova'));
+
 // Вывести числа от 1 до 100 в столбец. К каждой цифре подписать состояние возраста (1-17 ребенок, 18-30 - молодой, 30-55 - зрелый, от 55 - старый). Например. 33 - зрелый
-const getStateOfAge = () => {
-  for (let index = 1; index <= 100; index++) {
-    if (index < 18) {
-      console.log(`${index} - ребенок`);
-      continue;
-    } else if (index < 31) {
-      console.log(`${index} - молодой`);
-      continue;
-    } else if (index < 55) {
-      console.log(`${index} - зрелый`);
-      continue;
-    } else {
-      console.log(`${index} - старый`);
-    }
+const getStateOfAge = age => {
+  if (age < 18) {
+    return `${age} - ребенок`;
+  } else if (age < 31) {
+    return `${age} - молодой`;
+  } else if (age < 55) {
+    return `${age} - зрелый`;
+  } else {
+    return `${age} - старый`;
   }
 };
-getStateOfAge();
-// Создай новую функцию, в которую передаешь имя и возраст человека и получаешь сообщение (Иван имеет возраст 44 и он зрелый). А также вызови внутри своей функции, функцию из прошлого задания
 
+const getStateOfAllAges = () => {
+  for (let index = 1; index <= 100; index++) {
+    console.log(getStateOfAge(index));
+  }
+};
+getStateOfAllAges();
+
+// Создай новую функцию, в которую передаешь имя и возраст человека и получаешь сообщение (Иван имеет возраст 44 и он зрелый). А также вызови внутри своей функции, функцию из прошлого задания
+const getHumanDescription = (name, age) => {
+  return `${name} имеет возраст ${getStateOfAge(age)}`
+};
+
+console.log(getHumanDescription('Иван', 44));
 
 // Массивы
 // Сделай функцию, которая принимает массив любых целых чисел, которая возращает истинну, если все элементы четные, если бы хотя бы один элемент не четный, то false.
+const digitsArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+const evenArray = [2, 4, 6, 8];
+
+const isAllDigitsEven = arr => {
+  return arr.every(i => i % 2 === 0);
+}
+
+console.log(isAllDigitsEven(digitsArray));
+console.log(isAllDigitsEven(evenArray));
 
 // Сделай функцию, которая принимает массив любых целых чисел, которая возращает истинну, если хотя бы один элемент нечетный, если все четные, то false.
+const isOneDigitOdd = arr => {
+  return arr.some(i => i % 2 !== 0);
+}
+
+console.log(isOneDigitOdd(digitsArray));
+console.log(isOneDigitOdd(evenArray));
 // Сделай функцию, которая принимает массив любых целых чисел, которая возращает новый массив, где все элементы кратны пяти. ([1,2,5,12,15,21] вернет [5,15])
+const getMultipleOfFive = arr => {
+  return arr.filter(i => i % 5 === 0);
+};
+
+console.log(getMultipleOfFive(digitsArray));
+
 // Написать функцию, которая принимает массив чисел, например [1,2,3,4,5] и функция возращает среднее арифметическое, (округлить результат до десятых)
+const getAverageCount = arr => {
+  const sum = arr.reduce((acc, item) => {
+    return acc + item;
+  }, 0);
+  return Math.round(sum * 10 / arr.length) / 10;
+}
+console.log(getAverageCount(digitsArray));
+
 // Написать функцию, которая принимает массив чисел, например [1,2,3,4,5], и переносит первый элемент массива в конец (например можно засунуть первый элемент в конец, затем удалить первый элемент), попробуй несколькими способами сделать, если догадаешься
+const evenArray2 = [2, 4, 6, 8];
+const firstToLast = arr => {
+  arr.push(arr.at(0));
+  arr.shift();
+}
+firstToLast(evenArray2);
+console.log(evenArray2);
+
 // Написать функцию, которая принимает массив сотрудников, каждый сотрудник имеет имя и возраст ([{name: 'Иван', age: 23},...]) и возвращает массим, где каждый элемент представляет из себя строку "Имя: Иван, возвраст: 23".
+const workers = [{ name: 'Иван', age: 23 }, { name: 'Сергей', age: 25 }, { name: 'Петр', age: 26 }];
+const arrToStr = arr => {
+  return arr.map(i => `Имя: ${i.name}, возраст ${i.age}`);
+};
+
+console.log(arrToStr(workers));
