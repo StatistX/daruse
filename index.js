@@ -140,3 +140,63 @@ const arrToStr = arr => {
 };
 
 console.log(arrToStr(workers));
+
+// Объекты
+
+
+// У нас есть объект, в котором хранятся зарплаты нашей команды:
+let salaries = {
+  John: 100,
+  Ann: 160,
+  Pete: 130
+}
+// Напишите код для суммирования всех зарплат и сохраните результат в переменной sum. Должно получиться 390.
+// Если объект salaries пуст, то результат должен быть 0.
+const salariesValues = Object.values(salaries);
+const salariesSum = salariesValues.reduce((sum, item) => {
+  return sum + item || 0
+}, 0);
+console.log(salariesSum);
+
+
+// Создайте функцию multiplyNumeric(obj), которая умножает все числовые свойства объекта obj на 2.
+// Например:
+// до вызова функции
+let menu = {
+  width: 200,
+  height: 300,
+  title: "My menu"
+};
+// после вызова функции
+// menu = {
+//   width: 400,
+//   height: 600,
+//   title: "My menu"
+// };
+// Обратите внимание, что multiplyNumeric не нужно ничего возвращать. Следует напрямую изменять объект.
+// P.S. Используйте typeof для проверки, что значение свойства числовое.
+const multiplyNumeric = obj => {
+  for (let key in obj) {
+    if (typeof obj[key] === 'number') {
+      obj[key] *= 2;
+    };
+  }
+};
+multiplyNumeric(menu)
+console.log('menu', menu);
+
+
+// Написать объект ladder - объект, который позволяет подниматься вверх и спускаться. Пример работы должен быть таким:
+const ladder = {
+  step: 0,
+  showStep() { console.log(this.step) },
+  up() { this.step++ },
+  down() { this.step-- },
+};
+
+ladder.showStep(); // 0 (выводит ступеньку на который мы находимся)
+ladder.up();
+ladder.up();
+ladder.showStep(); // 2
+ladder.down();
+ladder.showStep(); // 1
