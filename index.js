@@ -209,18 +209,152 @@ ladder.showStep(); // 1
 const helloButton = document.createElement('button');
 helloButton.textContent = 'Привет';
 helloButton.addEventListener('click', () => alert('Привет Мир!'));
-document.body.prepend(helloButton);
-helloButton.after(document.createElement('br'));
+document.body.append(helloButton);
+helloButton.after(document.createElement('hr'));
 
 
 // Выводим кнопку с текстом "Заполнить" и незаполненный инпут, при клике на кнопку, заполняем инпут текстом "test@email.ru"
-
+const form1 = document.createElement('form');
+const submitButton = document.createElement('button');
+const input1 = document.createElement('input');
+submitButton.textContent = 'Заполнить';
+document.body.append(form1);
+form1.prepend(input1);
+form1.prepend(submitButton);
+form1.addEventListener('submit', (e) => {
+  e.preventDefault();
+  input1.value = 'test@email';
+});
+form1.after(document.createElement('hr'));
 
 
 // Выводим кнопку и инпут, в инпуте можно ввести любой и текст и при нажатии на кнопку, выводится алерт с текстом "Вы ввели 'текст инпута'" или "Вы ничего не ввели в поле".
+const form2 = document.createElement('form');
+const submitButton2 = document.createElement('button');
+const input2 = document.createElement('input');
+submitButton2.textContent = 'Заполнить';
+document.body.append(form2);
+form2.prepend(input2);
+form2.prepend(submitButton2);
+form2.addEventListener('submit', (e) => {
+  e.preventDefault();
+  alert(input2.value ? `Вы ввели ${input2.value}` : 'Вы ничего не ввели в поле');
+});
+form2.after(document.createElement('hr'));
+
+
 // Выводим кнопку с текстом "Поменять" и два инпута, при клике на кнопку инпуты меняются своим введеным текстом
+const form3 = document.createElement('form');
+const submitButton3 = document.createElement('button');
+submitButton3.textContent = 'Поменять';
+const input3 = document.createElement('input');
+const input4 = document.createElement('input');
+document.body.append(form3);
+form3.prepend(input3);
+form3.prepend(input4);
+form3.prepend(submitButton3);
+form3.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const inputValues = {
+    input3Value: input3.value,
+    input4Value: input4.value
+  };
+  input3.value = inputValues.input4Value;
+  input4.value = inputValues.input3Value
+});
+form3.after(document.createElement('hr'));
+
+
 // Выводим две кнопки "заблокировать" и "разблокировать" и инпут. Одна из них блокирует инпут с помощью атрибута disabled, а другая разблокирует
+const form4 = document.createElement('form');
+const submitButton4 = document.createElement('button');
+submitButton4.textContent = 'заблокировать';
+const submitButton5 = document.createElement('button');
+submitButton5.textContent = 'разблокировать';
+const input5 = document.createElement('input');
+document.body.append(form4);
+form4.prepend(input5);
+form4.prepend(submitButton5);
+form4.prepend(submitButton4);
+form4.addEventListener('submit', e => e.preventDefault());
+submitButton4.addEventListener('click', () => {
+  input5.setAttribute('disabled', 'disabled');
+});
+submitButton5.addEventListener('click', () => {
+  input5.removeAttribute('disabled');
+});
+form4.after(document.createElement('hr'));
+
+
 // Вывести любой квадрат и кнопку "скрыть квадрат". Когда мы нажимаем на скрыть, квадрат исчезает и текст кнопки меняется на "показать квадрат" и так можно кликать сколько угодно раз.
+const button5 = document.createElement('button');
+button5.textContent = 'скрыть квадрат';
+document.body.append(button5);
+const div1 = document.createElement('div');
+div1.style.width = '50px';
+div1.style.height = '50px';
+div1.style.backgroundColor = 'black';
+document.body.append(div1);
+button5.addEventListener('click', () => {
+  div1.style.display === ''
+    ? div1.style.display = 'none'
+    : div1.style.display = '';
+  button5.textContent === 'скрыть квадрат'
+    ? button5.textContent = 'показать квадрат'
+    : button5.textContent = 'скрыть квадрат';
+});
+div1.after(document.createElement('hr'));
+
+
 // Выводим красный квадрат, при наведении на него он становиться зеленым, а когда уводим курсор от него, обратно красным.
+const div2 = document.createElement('div');
+div2.style.width = '50px';
+div2.style.height = '50px';
+div2.style.backgroundColor = 'red';
+document.body.append(div2);
+
+div2.addEventListener('mouseenter', () => {
+  div2.style.backgroundColor = 'green';
+});
+
+div2.addEventListener('mouseleave', () => {
+  div2.style.backgroundColor = 'red';
+});
+
+div2.after(document.createElement('hr'));
+
+
 // Вывести 4 красных квадрата, при клике на любой, он становиться зеленым, при этом если есть уже зеленый квадрат, то он становиться обратно красным и так можно кликать на любой квадрат, он становиться зеленым, а старый зеленый квадрат обратно крассным и тд. (Сделать задачу так, чтобы можно было добавить ещё хоть 100 квадратов при этом скрипт не надо менять).
+const div3 = document.createElement('div');
+
+document.body.append(div3);
+
+const setSize = el => {
+  el.style.width = '50px';
+  el.style.height = '50px';
+};
+
+const setColor = el => {
+  el.style.backgroundColor = 'red';
+};
+
+for (let index = 0; index < 4; index++) {
+  const element = document.createElement('div');
+  setSize(element);
+  setColor(element);
+  div3.append(element);
+};
+
+div3.addEventListener('click', (e) => {
+  if (e.target === div3) return;
+
+  for (let el of div3.children) {
+    setColor(el);
+  }
+  e.target.style.backgroundColor = 'green';
+});
+
+div3.after(document.createElement('hr'));
+
+
 // Реализовать калькулятор. Выводим 10 кнопок цифр от 0 до 10. Кнопки: умножить, поделить, сложить, вычесть, вычислить. При нажатии на кнопки в любом порядке выводиться в отдельном блоке строка (5-4+3*2...) и при нажатии на кнопку посчитать, заменяем в блоке данную строку на результат её вычисления, при этом можно потом дальше вычислять с уже этим вычеслением.
