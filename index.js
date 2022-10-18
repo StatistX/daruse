@@ -326,7 +326,8 @@ div2.after(document.createElement('hr'));
 
 // Вывести 4 красных квадрата, при клике на любой, он становиться зеленым, при этом если есть уже зеленый квадрат, то он становиться обратно красным и так можно кликать на любой квадрат, он становиться зеленым, а старый зеленый квадрат обратно крассным и тд. (Сделать задачу так, чтобы можно было добавить ещё хоть 100 квадратов при этом скрипт не надо менять).
 const div3 = document.createElement('div');
-
+div3.style.display = 'flex';
+div3.style.gap = '10px';
 document.body.append(div3);
 
 const setSize = el => {
@@ -334,14 +335,14 @@ const setSize = el => {
   el.style.height = '50px';
 };
 
-const setColor = el => {
-  el.style.backgroundColor = 'red';
+const setColor = (el, color) => {
+  el.style.backgroundColor = color;
 };
 
 for (let index = 0; index < 4; index++) {
   const element = document.createElement('div');
   setSize(element);
-  setColor(element);
+  setColor(element, 'red');
   div3.append(element);
 };
 
@@ -349,12 +350,49 @@ div3.addEventListener('click', (e) => {
   if (e.target === div3) return;
 
   for (let el of div3.children) {
-    setColor(el);
+    setColor(el, 'red');
   }
-  e.target.style.backgroundColor = 'green';
+  setColor(e.target, 'green');
 });
 
 div3.after(document.createElement('hr'));
 
 
 // Реализовать калькулятор. Выводим 10 кнопок цифр от 0 до 10. Кнопки: умножить, поделить, сложить, вычесть, вычислить. При нажатии на кнопки в любом порядке выводиться в отдельном блоке строка (5-4+3*2...) и при нажатии на кнопку посчитать, заменяем в блоке данную строку на результат её вычисления, при этом можно потом дальше вычислять с уже этим вычеслением.
+const digitsContainer = document.createElement('div');
+digitsContainer.style.display = 'flex';
+digitsContainer.style.gap = '10px';
+document.body.append(digitsContainer);
+
+for (let index = 0; index < 10; index++) {
+  const element = document.createElement('div');
+  setSize(element);
+  setColor(element, 'lightSalmon');
+  element.textContent = index;
+  digitsContainer.append(element);
+};
+
+const buttonTitles = ['умножить', 'поделить', 'сложить', 'вычесть', 'вычислить'];
+
+const buttonsContainer = document.createElement('div');
+buttonsContainer.style.display = 'flex';
+buttonsContainer.style.gap = '10px';
+document.body.append(buttonsContainer);
+
+let stringCalculation = document.createElement('p');
+document.body.append(stringCalculation);
+
+for (let index = 0; index < buttonTitles.length; index++) {
+  const element = document.createElement('button');
+  element.textContent = buttonTitles[index];
+  buttonsContainer.append(element);
+};
+
+digitsContainer.addEventListener('click', e => {
+  if (e.target === digitsContainer) return;
+  stringCalculation.textContent += e.target.textContent;
+});
+
+buttonsContainer.addEventListener('click', e => {
+
+});
