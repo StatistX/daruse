@@ -395,20 +395,27 @@ digitsContainer.addEventListener('click', e => {
   stringCalculation.textContent += e.target.textContent;
 });
 
+const symbolValidation = symbol => {
+  const regExp = /\D$/;
+  regExp.test(stringCalculation.textContent)
+    ? stringCalculation.textContent = stringCalculation.textContent.replace(/\D$/, symbol)
+    : stringCalculation.textContent += symbol;
+};
+
 buttonsContainer.addEventListener('click', e => {
   const action = e.target.textContent;
   switch (action) {
     case 'умножить':
-      stringCalculation.textContent += '*';
+      symbolValidation('*');
       break;
     case 'поделить':
-      stringCalculation.textContent += '/';
+      symbolValidation('/');
       break;
     case 'сложить':
-      stringCalculation.textContent += '+';
+      symbolValidation('+');
       break;
     case 'вычесть':
-      stringCalculation.textContent += '-';
+      symbolValidation('-');
       break;
     case 'вычислить':
       try {
