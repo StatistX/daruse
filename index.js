@@ -382,6 +382,8 @@ document.body.append(buttonsContainer);
 let stringCalculation = document.createElement('p');
 document.body.append(stringCalculation);
 
+let calculatedValue = 0;
+
 for (let index = 0; index < buttonTitles.length; index++) {
   const element = document.createElement('button');
   element.textContent = buttonTitles[index];
@@ -394,5 +396,31 @@ digitsContainer.addEventListener('click', e => {
 });
 
 buttonsContainer.addEventListener('click', e => {
-
+  const action = e.target.textContent;
+  switch (action) {
+    case 'умножить':
+      stringCalculation.textContent += '*';
+      break;
+    case 'поделить':
+      stringCalculation.textContent += '/';
+      break;
+    case 'сложить':
+      stringCalculation.textContent += '+';
+      break;
+    case 'вычесть':
+      stringCalculation.textContent += '-';
+      break;
+    case 'вычислить':
+      try {
+        calculatedValue = eval(stringCalculation.textContent);
+        stringCalculation.textContent = calculatedValue;
+      } catch {
+        stringCalculation.textContent = 'ошибка в расчетах';
+      }
+      break;
+    default:
+      break;
+  }
 });
+
+
