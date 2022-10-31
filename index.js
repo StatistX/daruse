@@ -26,7 +26,7 @@ console.log(gender('M'));
 // Сделайте функцию, которая принимает параметром число от 1 до 7, а возвращает день недели на русском языке.
 const days = ['пнд', 'вт', 'ср', 'чтв', 'пт', 'сб', 'вс'];
 const dayOfWeek = num => {
-  return num >= 0 && num <= 7
+  return num >= 1 && num <= 7
     ? days[num - 1]
     : 'no day'
 };
@@ -52,7 +52,7 @@ const timeOfDay = name => {
     return `Доброй ночи, ${name}`;
   } else if (hours >= 6 && hours < 12) {
     return `Доброе утро, ${name}`;
-  } else if (hours >= 6 && hours < 12) {
+  } else if (hours >= 13 && hours < 17) {
     return `Добрый день, ${name}`;
   } else if (hours >= 18 && hours < 23) {
     return `Добрый день, ${name}`;
@@ -83,9 +83,7 @@ const getStateOfAllAges = () => {
 getStateOfAllAges();
 
 // Создай новую функцию, в которую передаешь имя и возраст человека и получаешь сообщение (Иван имеет возраст 44 и он зрелый). А также вызови внутри своей функции, функцию из прошлого задания
-const getHumanDescription = (name, age) => {
-  return `${name} имеет возраст ${getStateOfAge(age)}`
-};
+const getHumanDescription = (name, age) => `${name} имеет возраст ${getStateOfAge(age)}`;
 
 console.log(getHumanDescription('Иван', 44));
 
@@ -94,24 +92,18 @@ console.log(getHumanDescription('Иван', 44));
 const digitsArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 const evenArray = [2, 4, 6, 8];
 
-const isAllDigitsEven = arr => {
-  return arr.every(i => i % 2 === 0);
-}
+const isAllDigitsEven = arr => arr.every(i => i % 2 === 0);
 
 console.log(isAllDigitsEven(digitsArray));
 console.log(isAllDigitsEven(evenArray));
 
 // Сделай функцию, которая принимает массив любых целых чисел, которая возращает истинну, если хотя бы один элемент нечетный, если все четные, то false.
-const isOneDigitOdd = arr => {
-  return arr.some(i => i % 2 !== 0);
-}
+const isOneDigitOdd = arr => arr.some(i => i % 2 !== 0);
 
 console.log(isOneDigitOdd(digitsArray));
 console.log(isOneDigitOdd(evenArray));
 // Сделай функцию, которая принимает массив любых целых чисел, которая возращает новый массив, где все элементы кратны пяти. ([1,2,5,12,15,21] вернет [5,15])
-const getMultipleOfFive = arr => {
-  return arr.filter(i => i % 5 === 0);
-};
+const getMultipleOfFive = arr => arr.filter(i => i % 5 === 0);
 
 console.log(getMultipleOfFive(digitsArray));
 
@@ -135,9 +127,7 @@ console.log(evenArray2);
 
 // Написать функцию, которая принимает массив сотрудников, каждый сотрудник имеет имя и возраст ([{name: 'Иван', age: 23},...]) и возвращает массим, где каждый элемент представляет из себя строку "Имя: Иван, возвраст: 23".
 const workers = [{ name: 'Иван', age: 23 }, { name: 'Сергей', age: 25 }, { name: 'Петр', age: 26 }];
-const arrToStr = arr => {
-  return arr.map(i => `Имя: ${i.name}, возраст ${i.age}`);
-};
+const arrToStr = arr => arr.map(i => `Имя: ${i.name}, возраст ${i.age}`);
 
 console.log(arrToStr(workers));
 
@@ -430,4 +420,118 @@ buttonsContainer.addEventListener('click', e => {
   }
 });
 
+stringCalculation.after(document.createElement('hr'));
 
+
+// Регулярные выражения
+
+
+// Проверка URL на валидность. Передаем урл функции и проверяем валидное оно или нет (возращаем тру или фолс). Критерии: Урл должен начинаться с http:// иили https:// и заканчиваться на .php или .html. Например - http://site.ru/index.php - валидный, http://site.com - не валидный, site.ru/index.php - не валидный
+const urlString1 = 'http://site.ru/index.php';
+const urlString2 = 'https://site.com';
+
+const validationCheck = str => {
+  const regExp1 = /^http\:\/\/|^https\:\/\//;
+  const regExp2 = /.php$|.html$/;
+  return regExp1.test(str) && regExp2.test(str);
+};
+
+console.log(validationCheck(urlString1));
+console.log(validationCheck(urlString2));
+
+
+// Проверка номера телефона на валидность. Передаем телефон функции и проверяем валидное оно или нет (возращаем тру или фолс). Такие номера должны быть валидными: 89991112233, 8 (999) 1112233, +7 (999) 111-22-33, +7 (999) 111 22 33. Т.е. телефон может начинаться как и с +7, так и с 8. код оператора, может быть в скобках и без, и с пробелами. Оставшиеся часть может быть с дефисами и пробелами
+
+
+// Ассинхронность
+// Написать функцию с колбеком, которая принимает число с колбеком и через секунду выводить в консоль число. Ограничения - для решения задачи setTimeout - можно использовать только один раз! Реализовать вывод в консоль от 1 до 10 через секунду. Вызываем так (только более большая вложенность):
+const func = (digit, callback = () => { }) => {
+  setTimeout(() => {
+    console.log(digit);
+    callback(digit + 1)
+  }, 1000);
+};
+
+func(1, (n) => {
+  func(n, (n) => {
+    func(n, (n) => {
+      func(n, (n) => {
+        func(n, (n) => {
+          func(n, (n) => {
+            func(n, (n) => {
+              func(n, (n) => {
+                func(n, (n) => {
+                  func(n);
+                })
+              })
+            })
+          })
+        })
+      })
+    })
+  })
+});
+
+
+// Выводим от 1 до 10 через секунду каждый раз. Используя Promise. Ограничения - setTimeout и new Promise() мы можем вызывать только один раз для решения нашей задачи.
+const counter = digit => {
+  return new Promise(function (resolve) {
+    setTimeout(() => {
+      console.log(digit);
+      resolve(digit + 1)
+    }, 1000)
+  })
+};
+
+counter(1)
+  .then(counter)
+  .then(counter)
+  .then(counter)
+  .then(counter)
+  .then(counter)
+  .then(counter)
+  .then(counter)
+  .then(counter)
+  .then(counter);
+
+
+// Скопируем решения из прошлой задачи и переписываем на async-await функцию, конструкцию .then - не используем
+const counter2 = async digit => {
+  const promise = new Promise(function (resolve) {
+    setTimeout(() => {
+      console.log(digit);
+      resolve(digit + 1)
+    }, 1000);
+  });
+
+  const result = await promise;
+  if (result < 11) {
+    counter2(result)
+  }
+};
+
+counter2(1);
+
+
+// Сделайте функцию, которая будет генерировать случайные числа от 1 до 10. Сделайте так, чтобы сгенерированное число было задержкой функции setTimeout в секундах. Оберните все это в промис. Пусть промис выполнится успешно, если сгенерировано число от 1 до 5, и с ошибкой - если от 6 до 10.
+const counter3 = () => {
+  const rand = Math.floor(Math.random() * 10 + 1);
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log(rand);
+      if (rand <= 5) {
+        resolve();
+      } else (
+        reject(new Error("error"))
+      )
+    }, rand * 100)
+  })
+}
+
+counter3();
+
+
+// Сделайте цепочку из трех промисов. Пусть первый промис возвращает число. Сделайте так, чтобы каждый последующий промис через 3 секунды возводил в квадрат результат предыдущего промиса. После окончания манипуляций выведите число алертом на экран.
+
+
+// Выполните запрос по получению списка пользователей, по этому url https://jsonplaceholder.typicode.com/users, в случае успеха выводим на экран пользователей со всеми данными в табличку. В случае не успеха выводим на экран ошибку "Ошибка, запрос не отработан". Используем для решения fetch.
