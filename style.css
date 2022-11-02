@@ -1,0 +1,44 @@
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./fonts/montserrat-v25-latin_cyrillic-regular.woff2') format('woff2'),
+    url('./fonts/montserrat-v25-latin_cyrillic-regular.woff') format('woff');
+}
+
+* {
+  font-family: "Montserrat", Times, serif;
+}
+
+table,
+th,
+td {
+  border: solid 1px #ddd;
+  border-collapse: collapse;
+  padding: 2px 3px;
+  text-align: center;
+}
+
+button {
+  transition-duration: 0.4s;
+  padding: 10px;
+  background-color: none;
+  border-radius: 8px;
+  background-color: white;
+  color: black;
+  border: 1px solid #4CAF50;
+  font-family: inherit;
+  justify-self: start;
+  align-self: start;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+button:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 4px 0px rgba(34, 60, 80, 0.2);
+}
