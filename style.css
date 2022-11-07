@@ -39,6 +39,55 @@ button:hover {
 }
 
 button:active {
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 4px 0px rgba(34, 60, 80, 0.2);
+  background-color: #0d350f;
+  color: white;
+  transition-duration: 0.1s;
+}
+
+.item_checked {
+  text-decoration: line-through;
+}
+
+/* Slider */
+#slider {
+  width: 800px;
+  height: 400px;
+  overflow: hidden;
+  display: flex;
+  position: relative;
+}
+
+.slider__container {
+  position: absolute;
+  display: flex;
+  height: 100%;
+}
+
+.slider__counter {
+  position: absolute;
+  top: 0;
+}
+
+.slider__caption {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.slider__left-bth {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.slider__right-bth {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.slider__image {
+  object-fit: contain;
 }

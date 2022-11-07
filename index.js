@@ -138,6 +138,90 @@ showUsersBtn.after(document.createElement('hr'));
 // Полноценные приложения
 // TODO - лист
 // Релизовать TODO-лист.
+const todos = [
+  { id: 1, title: 'Eat', checked: false },
+  { id: 2, title: 'Drink', checked: false },
+  { id: 3, title: 'Walk', checked: true },
+  { id: 4, title: 'Sleep', checked: false },
+];
+
 const todoContainer = document.createElement('div');
-todoContainer.id = 'showData';
+todoContainer.style.display = 'flex';
+todoContainer.style.flexDirection = 'column';
+todoContainer.style.width = '300px';
 document.body.append(todoContainer);
+
+const todoHeading = document.createElement('h3');
+todoHeading.textContent = 'My To Do List';
+todoContainer.append(todoHeading);
+
+const todoForm = document.createElement('form');
+todoContainer.append(todoForm);
+
+const todoInput = document.createElement('input');
+todoForm.append(todoInput);
+
+const addBtn = document.createElement('button');
+addBtn.textContent = 'Add todo';
+todoForm.append(addBtn);
+
+const generateItem = (item) => {
+  const todoItem = document.createElement('div');
+  todoItem.style.display = 'flex';
+  todoItem.style.justifyContent = 'space-between';
+  todoContainer.append(todoItem);
+
+  const todoItemText = document.createElement('p');
+  todoItemText.textContent = item.title;
+
+  if (item.checked) todoItemText.classList.add('item_checked');
+
+  todoItem.append(todoItemText);
+
+  const deleteBtn = document.createElement('button');
+  deleteBtn.textContent = 'X';
+  todoItem.append(deleteBtn);
+
+  todoItem.addEventListener('click', () => {
+    todoItemText.classList.toggle('item_checked');
+  });
+
+  deleteBtn.addEventListener('click', () => {
+    todoItem.remove();
+  });
+};
+
+const addItem = () => {
+  const newItem = {
+    id: Date.now(),
+    title: todoInput.value,
+    checked: false
+  };
+  generateItem(newItem);
+  todoInput.value = '';
+};
+
+todos.map(item => generateItem(item));
+
+todoForm.addEventListener('submit', e => {
+  e.preventDefault();
+  addItem();
+});
+
+
+// Слайдер
+import { slides, Slider } from './slider.js';
+
+const slider = new Slider(
+  slides, // слайды
+  'slider', // id для вставки в html
+  {
+    loop: true,
+    navs: true,
+    pags: true,
+    auto: true,
+    delay: 3,
+  }
+);
+
+slider.addSlides();
