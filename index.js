@@ -220,7 +220,7 @@ const slider = new Slider(
     navs: true,
     pags: true,
     auto: true,
-    delay: 3,
+    delay: 2000,
   }
 );
 

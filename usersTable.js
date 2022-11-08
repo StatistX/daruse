@@ -13,8 +13,8 @@ const getUsers = async url => {
   }
 };
 
-let tableFromJson = async () => {
-  let users = await getUsers('https://jsonplaceholder.typicode.com/users');
+const tableFromJson = async () => {
+  const users = await getUsers('https://jsonplaceholder.typicode.com/users');
 
   let col = [];
   for (let i = 0; i < users.length; i++) {
@@ -48,7 +48,6 @@ let tableFromJson = async () => {
   const divShowData = document.getElementById('showData');
   divShowData.innerHTML = "";
   divShowData.append(table);
-
 };
 
 export default tableFromJson;
