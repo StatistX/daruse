@@ -192,13 +192,15 @@ const generateItem = (item) => {
 };
 
 const addItem = () => {
-  const newItem = {
-    id: Date.now(),
-    title: todoInput.value,
-    checked: false
-  };
-  generateItem(newItem);
-  todoInput.value = '';
+  if (todoInput.value) {
+    const newItem = {
+      id: Date.now(),
+      title: todoInput.value,
+      checked: false
+    };
+    generateItem(newItem);
+    todoInput.value = '';
+  }
 };
 
 todos.map(item => generateItem(item));
